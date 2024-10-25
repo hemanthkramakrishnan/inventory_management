@@ -1,0 +1,21 @@
+<!-- inventory/templates_org/inventory/stock_confirm_delete.html -->
+{% extends 'inventory/base.html' %}
+
+{% block title %}Delete Outgoing Stock{% endblock %}
+
+{% block content %}
+<h1>Are you sure you want to delete the outgoing stock for product ?</h1>
+<div>
+	<p>"{{ outgoing_stock.product.description }}"</p>
+	<p>"{{ outgoing_stock.product.code }}"</p>
+	<p>"{{ outgoing_stock.batch_code }}"</p>
+	<p>"{{ outgoing_stock.tailor.name }}"</p>
+	<p>"{{ outgoing_stock.quantity }}"</p>
+	<p>"{{ outgoing_stock.warehouse }}"</p>
+</div>
+<form method="post">
+    {% csrf_token %}
+    <button type="submit" class="btn btn-danger">Confirm</button>
+    <a href="{% url 'outgoing_stock_list' %}" class="btn btn-secondary">Cancel</a>
+</form>
+{% endblock %}

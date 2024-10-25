@@ -1,0 +1,41 @@
+<!-- inventory/templates_org/inventory/category_list.html -->
+{% extends 'inventory/base.html' %}
+
+{% block title %}Product List{% endblock %}
+
+{% block content %}
+<div class="d-flex justify-content-between mb-3 border-bottom">
+    <h3 class="text-center">Product List</h3>
+    <a href="{% url 'product_add' %}" class="btn btn-primary mb-3">+ New</a>
+</div>
+
+<div class="d-flex">
+    <table class="table table-bordered text-center">
+        <thead>
+            <tr class="table-primary">
+                <th scope="col">Category</th>
+                <th scope="col">Code</th>
+				<th scope="col">Size(cms)</th>
+				<th scope="col">Description</th>
+				<th scope="col">Price</th>
+				<th scope="col">Actions</th>
+            </tr>
+        </thead>
+        <tbody>
+            {% for product in products %}
+                <tr>
+                    <td>{{ product.category }}</td>
+					<td>{{ product.code }}</td>
+					<td>{{ product.size }}</td>
+                    <td>{{ product.description }}</td>
+					<td>Rs.{{ product.price }}</td>
+                    <td>
+                        <a href="{% url 'product_edit' product.pk %}" class="btn btn-secondary btn-sm">Edit</a>
+                		<a href="{% url 'product_delete' product.pk %}" class="btn btn-danger btn-sm">Delete</a>
+                    </td>
+                </tr>
+            {% endfor %}
+        </tbody>
+    </table>
+</div>
+{% endblock %}

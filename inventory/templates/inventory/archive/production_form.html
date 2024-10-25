@@ -1,0 +1,66 @@
+<!-- inventory/templates/inventory/production_form.html -->
+{% extends 'inventory/base.html' %}
+{% load form_tags %}
+
+{% block title %}{{ form.instance.pk|yesno:"Edit,Add" }} Production{% endblock %}
+
+{% block content %}
+<div class="d-flex justify-content-center mb-3 border-bottom">
+    <h3>{{ form.instance.pk|yesno:"EDIT,ADD" }} Production</h3>
+</div>
+<div class="container">
+    <br>
+    <br>
+    <form method="post" class="needs-validation" novalidate>
+        {% csrf_token %}
+        <div class="form-group row">
+            <div class="col-sm-2"></div>
+            <label for="{{ form.product.id_for_label }}" class="col-sm-2 col-form-label-lg fw-bold">Product</label>
+            <div class="col-sm-6">
+                {{ form.product|add_class:'form-control' }}
+            </div>
+        </div>
+        <div class="form-group row">
+            <div class="col-sm-2"></div>
+            <label for="{{ form.quantity.id_for_label }}" class="col-sm-2 col-form-label-lg fw-bold">Quantity</label>
+            <div class="col-sm-6">
+                {{ form.quantity|add_class:'form-control' }}
+            </div>
+        </div>
+        <div class="form-group row">
+            <div class="col-sm-2"></div>
+            <label for="{{ form.vendor.id_for_label }}" class="col-sm-2 col-form-label-lg fw-bold">Vendor/Tailor</label>
+            <div class="col-sm-6">
+                {{ form.vendor|add_class:'form-control' }}
+            </div>
+        </div>
+        <div class="form-group row">
+            <div class="col-sm-2"></div>
+            <label for="{{ form.warehouse.id_for_label }}" class="col-sm-2 col-form-label-lg fw-bold">Warehouse</label>
+            <div class="col-sm-6">
+                {{ form.warehouse|add_class:'form-control' }}
+            </div>
+        </div>
+        <div class="form-group row">
+            <div class="col-sm-2"></div>
+            <label for="{{ form.type.id_for_label }}" class="col-sm-2 col-form-label-lg fw-bold">Type</label>
+            <div class="col-sm-6">
+                {{ form.type|add_class:'form-control' }}
+            </div>
+        </div>
+        <br>
+        <div class="d-flex justify-content-center">
+            <button type="submit" class="btn btn-primary">Save</button>&emsp;
+            <a href="{% url 'production_list' %}" class="btn btn-secondary">Cancel</a>
+        </div>
+    </form>
+</div>
+<script>
+    document.addEventListener('DOMContentLoaded', function() {
+        var typeField = document.getElementById('{{ form.type.id_for_label }}');
+        if (typeField) {
+            typeField.disabled = true;
+        }
+    });
+</script>
+{% endblock %}

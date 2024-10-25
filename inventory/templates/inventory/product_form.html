@@ -1,0 +1,65 @@
+<!-- inventory/templates_org/inventory/product_form.html -->
+{% extends 'inventory/base.html' %}
+{% load form_tags %}
+
+{% block title %}{{ form.instance.pk|yesno:"Edit,Add" }} Product{% endblock %}
+
+{% block content %}
+<div class="d-flex justify-content-center mb-3 border-bottom">
+    <h3>{{ form.instance.pk|yesno:"EDIT,ADD" }} Product</h3>
+</div>
+<div class="container">
+    <br>
+    <br>
+    <form method="post" class="form">
+        {% csrf_token %}
+        <div class="form-group row">
+			<div class="col-sm-2"></div>
+            <label for="{{ form.category.id_for_label }}" class="col-sm-2 col-form-label-lg fw-bold">Category</label>
+            <div class="col-sm-6">
+                {{ form.category|add_class:'form-control' }}
+            </div>
+        </div>
+        <div class="form-group row">
+			<div class="col-sm-2"></div>
+           <label for="{{ form.code.id_for_label }}" class="col-sm-2 col-form-label-lg fw-bold">Code</label>
+            <div class="col-sm-6">
+                {{ form.code|add_class:'form-control' }}
+            </div>
+        </div>
+        <div class="form-group row">
+			<div class="col-sm-2"></div>
+            <label for="{{ form.size.id_for_label }}" class="col-sm-2 col-form-label-lg fw-bold">Size</label>
+            <div class="col-sm-6">
+                {{ form.size|add_class:'form-control' }}
+            </div>
+        </div>
+		<div class="form-group row">
+			<div class="col-sm-2"></div>
+            <label for="{{ form.price.id_for_label }}" class="col-sm-2 col-form-label-lg fw-bold">Price</label>
+            <div class="col-sm-6">
+                {{ form.price|add_class:'form-control' }}
+            </div>
+        </div>
+		<div class="form-group row">
+			<div class="col-sm-2"></div>
+            <label for="{{ form.cost.id_for_label }}" class="col-sm-2 col-form-label-lg fw-bold">Cost</label>
+            <div class="col-sm-6">
+                {{ form.cost|add_class:'form-control' }}
+            </div>
+        </div>
+        <div class="form-group row">
+			<div class="col-sm-2"></div>
+            <label for="{{ form.description.id_for_label }}" class="col-sm-2 col-form-label-lg fw-bold">Description</label>
+            <div class="col-sm-6">
+                {{ form.description|add_class:'form-control' }}
+            </div>
+        </div>
+		<br>
+		<div class="d-flex justify-content-center">
+			<button type="submit" class="btn btn-primary">Save</button>&emsp;
+			<a href="{% url 'product_list' %}" class="btn btn-secondary">Cancel</a>
+		</div>
+    </form>
+</div>
+{% endblock %}

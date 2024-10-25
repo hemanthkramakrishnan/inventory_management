@@ -1,0 +1,50 @@
+<!-- inventory/templates/inventory/warehouse_form.html -->
+{% extends 'inventory/base.html' %}
+{% load form_tags %}
+
+{% block title %}{{ form.instance.pk|yesno:"Edit,Add" }} Warehouse{% endblock %}
+
+{% block content %}
+<div class="d-flex justify-content-center mb-3 border-bottom">
+    <h3>{{ form.instance.pk|yesno:"EDIT,ADD" }} Warehouse</h3>
+</div>
+<div class="container">
+    <br>
+    <br>
+    <form method="post" class="form">
+        {% csrf_token %}
+        <div class="form-group row">
+			<div class="col-sm-2"></div>
+            <label for="{{ form.name.id_for_label }}" class="col-sm-2 col-form-label-lg fw-bold">Name</label>
+            <div class="col-sm-6">
+                {{ form.name|add_class:'form-control' }}
+            </div>
+        </div>
+        <div class="form-group row">
+			<div class="col-sm-2"></div>
+           <label for="{{ form.code.id_for_label }}" class="col-sm-2 col-form-label-lg fw-bold">Code</label>
+            <div class="col-sm-6">
+                {{ form.code|add_class:'form-control' }}
+            </div>
+        </div>
+        <div class="form-group row">
+			<div class="col-sm-2"></div>
+            <label for="{{ form.phone.id_for_label }}" class="col-sm-2 col-form-label-lg fw-bold">Phone</label>
+            <div class="col-sm-6">
+                {{ form.phone|add_class:'form-control' }}
+            </div>
+        </div>
+        <div class="form-group row">
+			<div class="col-sm-2"></div>
+            <label for="{{ form.location.id_for_label }}" class="col-sm-2 col-form-label-lg fw-bold">Location</label>
+            <div class="col-sm-6">
+                {{ form.location|add_class:'form-control' }}
+            </div>
+        </div>
+		<div class="d-flex justify-content-center">
+			<button type="submit" class="btn btn-primary">Save</button>&emsp;
+			<a href="{% url 'warehouse_list' %}" class="btn btn-secondary">Cancel</a>
+		</div>
+    </form>
+</div>
+{% endblock %}

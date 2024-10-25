@@ -1,0 +1,153 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    {% load static %}
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>{% block title %}Inventory Management{% endblock %}</title>
+    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.3/css/all.min.css">
+    <link rel="stylesheet" href="{% static 'css/style.css' %}">
+</head>
+<body>
+    <div class="d-flex">
+        <!-- Sidebar -->
+        <nav class="navbar navbar-dark sidebar flex-column p-3">
+            <a class="navbar-brand d-flex align-items-center mb-3" href="{% url 'home' %}">
+                <img src="{% static 'images/logo.png' %}" width="30" height="30" class="d-inline-block align-top" alt="">
+                <span class="ml-2">Krishna's</span>
+            </a>
+            <ul class="navbar-nav flex-column w-100">
+                <li class="nav-item">
+                    <a class="nav-link text-white" href="{% url 'home' %}">
+                        <i class="fa fa-home"></i>
+                        <span class="ml-2">Home</span>
+                    </a>
+                </li>
+                <li class="nav-item dropdown">
+                    <a class="nav-link text-white dropdown-toggle" href="#" id="inventoryDropdown" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+                        <i class="fa fa-box"></i>
+                        <span class="ml-2">Inventory</span>
+                    </a>
+                    <div class="dropdown-menu" aria-labelledby="inventoryDropdown">
+                        <a class="dropdown-item" href="{% url 'product_list' %}">Items</a>
+                        <a class="dropdown-item" href="{% url 'category_list' %}">Categories</a>
+                        <a class="dropdown-item" href="{% url 'vendor_list' %}">Vendors</a>
+                        <a class="dropdown-item" href="{% url 'warehouse_list' %}">Warehouses</a>
+                    </div>
+                </li>
+                <li class="nav-item dropdown">
+                    <a class="nav-link text-white dropdown-toggle" href="#" id="salesDropdown" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+                        <i class="fa fa-chart-line"></i>
+                        <span class="ml-2">Stock</span>
+                    </a>
+                    <div class="dropdown-menu" aria-labelledby="salesDropdown">
+                        <a class="dropdown-item" href="#">Summary</a>
+                        <a class="dropdown-item" href="#">Add Stock</a>
+                        <a class="dropdown-item" href="#">Log</a>
+                    </div>
+                </li>
+                <li class="nav-item dropdown">
+                    <a class="nav-link text-white dropdown-toggle" href="#" id="purchasesDropdown" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+                        <i class="fa fa-shopping-cart"></i>
+                        <span class="ml-2">Production</span>
+                    </a>
+                    <div class="dropdown-menu" aria-labelledby="purchasesDropdown">
+                        <a class="dropdown-item" href="#">Summary</a>
+                        <a class="dropdown-item" href="#">Add Production</a>
+                    </div>
+                </li>
+                <li class="nav-item">
+                    <a class="nav-link text-white" href="#">
+                        <i class="fa fa-chart-bar"></i>
+                        <span class="ml-2">Reports</span>
+                    </a>
+                </li>
+                <li class="nav-item">
+                    <a class="nav-link text-white" href="#">
+                        <i class="fa fa-file-alt"></i>
+                        <span class="ml-2">Documents</span>
+                    </a>
+                </li>
+            </ul>
+        </nav>
+
+        <!-- Main content -->
+        <div class="flex-grow-1">
+            <!-- Top Navbar -->
+            <nav class="navbar navbar-expand-lg navbar-light bg-light border-bottom">
+                <div class="container-fluid">
+                    <span class="navbar-brand">Inventory Management</span>
+                    <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarNav" aria-controls="navbarNav" aria-expanded="false" aria-label="Toggle navigation">
+                        <span class="navbar-toggler-icon"></span>
+                    </button>
+                    <div class="collapse navbar-collapse justify-content-end" id="navbarNav">
+                        <ul class="navbar-nav ml-auto">
+                            {% if user.is_authenticated %}
+                                <li class="nav-item dropdown">
+                                    <a class="nav-link dropdown-toggle d-flex align-items-center" href="#" id="userDropdown" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+                                        <span class="user-name">{{ user.first_name }}</span>
+                                        <div class="user-photo ml-2">
+                                            {% if user.userprofile.photo %}
+                                                <img src="{{ user.userprofile.photo.url }}" alt="User Photo" class="rounded-circle" width="40" height="40">
+                                            {% else %}
+                                                <img src="{% static 'images/default_user.png' %}" alt="User Photo" class="rounded-circle" width="40" height="40">
+                                            {% endif %}
+                                        </div>
+                                    </a>
+                                    <div class="dropdown-menu dropdown-menu-right" aria-labelledby="userDropdown">
+                                        <a class="dropdown-item" href="{% url 'logout' %}">Logout</a>
+                                    </div>
+                                </li>
+                            {% else %}
+                                <li class="nav-item"><a class="nav-link" href="{% url 'login' %}">Login</a></li>
+                                <li class="nav-item"><a class="nav-link" href="{% url 'signup' %}">Sign Up</a></li>
+                            {% endif %}
+                        </ul>
+                    </div>
+                </div>
+            </nav>
+
+            <!-- Page Content -->
+            <div class="container-fluid mt-4">
+                {% block content %}
+                {% endblock %}
+            </div>
+        </div>
+    </div>
+    <script src="https://code.jquery.com/jquery-3.5.1.slim.min.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/@popperjs/core@2.5.3/dist/umd/popper.min.js"></script>
+    <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/js/bootstrap.min.js"></script>
+    <script>
+        $(document).ready(function() {
+            $('.dropdown-toggle').on('click', function(e) {
+                e.preventDefault();
+                e.stopPropagation();
+
+                var $this = $(this);
+                var $dropdownMenu = $this.parent().find('.dropdown-menu');
+
+                // Close all open dropdowns except the clicked one
+                $('.dropdown-menu').not($dropdownMenu).removeClass('show');
+                $('.dropdown-toggle').not($this).removeClass('rotate-down');
+
+                // Toggle the clicked dropdown
+                $dropdownMenu.toggleClass('show');
+                $this.toggleClass('rotate-down');
+            });
+
+            // Prevent closing the dropdown when clicking inside it
+            $('.dropdown-menu').on('click', function(e) {
+                e.stopPropagation();
+            });
+
+            $(document).on('click', function(e) {
+                if (!$(e.target).closest('.dropdown').length) {
+                    $('.dropdown-menu').removeClass('show');
+                    $('.dropdown-toggle').removeClass('rotate-down');
+                }
+            });
+        });
+    </script>
+</body>
+</html>

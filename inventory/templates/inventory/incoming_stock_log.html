@@ -1,0 +1,38 @@
+{% extends 'inventory/base.html' %}
+
+{% block title %}Incoming Stock Log{% endblock %}
+
+{% block content %}
+<div class="d-flex justify-content-between mb-3 border-bottom">
+    <h3 class="text-center">Incoming Stock Log</h3>
+</div>
+
+<div class="d-flex">
+    <table class="table table-bordered text-center">
+        <thead>
+            <tr class="table-primary">
+                <th scope="col">Product</th>
+				<th scope="col">Code</th>
+				<th scope="col">Batch Code</th>
+                <th scope="col">Quantity</th>
+                <th scope="col">Tailor</th>
+                <th scope="col">Warehouse</th>
+                <th scope="col">Date Added</th>
+            </tr>
+        </thead>
+        <tbody>
+            {% for log in logs %}
+                <tr>
+                    <td>{{ log.outgoing_log.product.description }}</td>
+					<td>{{ log.outgoing_log.product.code }}</td>
+					<td>{{ log.outgoing_log.batch_code }}</td>
+                    <td>{{ log.quantity }}</td>
+                    <td>{{ log.outgoing_log.tailor }}</td>
+                    <td>{{ log.outgoing_log.warehouse.name }}</td>
+                    <td>{{ log.date_added }}</td>
+                </tr>
+            {% endfor %}
+        </tbody>
+    </table>
+</div>
+{% endblock %}

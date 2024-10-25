@@ -1,0 +1,44 @@
+<!-- inventory/templates_org/inventory/category_list.html -->
+{% extends 'inventory/base.html' %}
+
+{% block title %}Production List{% endblock %}
+
+{% block content %}
+<div class="d-flex justify-content-between mb-3 border-bottom">
+    <h3 class="text-center">Production List - Pending items from Tailors</h3>
+    <a href="{% url 'production_add_stock_in' %}" class="btn btn-primary mb-3">+ Stock In</a>
+	<a href="{% url 'production_add_stock_out' %}" class="btn btn-primary mb-3">+ Stock Out</a>
+</div>
+
+<div class="d-flex">
+    <table class="table table-bordered text-center">
+        <thead>
+            <tr class="table-primary">
+                <th scope="col">Product</th>
+				<th scope="col">Size</th>
+                <th scope="col">Quantity</th>
+				<th scope="col">Vendor/Tailor</th>
+				<th scope="col">Warehouse</th>
+				<th scope="col">Type</th>
+				<th scope="col">Actions</th>
+            </tr>
+        </thead>
+        <tbody>
+            {% for production in productions %}
+                <tr>
+                    <td>{{ production.product }}</td>
+					<td>{{ production.product.size }} cm</td>
+					<td>{{ production.quantity }}</td>
+					<td>{{ production.vendor }}</td>
+                    <td>{{ production.warehouse }}</td>
+					<td>{{ production.type }}</td>
+                    <td>
+                        <a href="{% url 'production_edit' production.pk %}" class="btn btn-secondary btn-sm">Edit</a>
+                		<a href="{% url 'production_delete' production.pk %}" class="btn btn-danger btn-sm">Delete</a>
+                    </td>
+                </tr>
+            {% endfor %}
+        </tbody>
+    </table>
+</div>
+{% endblock %}

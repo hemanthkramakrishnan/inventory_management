@@ -1,0 +1,39 @@
+<!-- inventory/templates_org/inventory/warehouse_list.html -->
+{% extends 'inventory/base.html' %}
+
+{% block title %}Warehouse List{% endblock %}
+
+{% block content %}
+<div class="d-flex justify-content-between mb-3 border-bottom">
+    <h3 class="text-center">Warehouse List</h3>
+    <a href="{% url 'warehouse_add' %}" class="btn btn-primary mb-3">+ New</a>
+</div>
+
+<div class="d-flex">
+    <table class="table table-bordered text-center">
+        <thead>
+            <tr class="table-primary">
+                <th scope="col">Name</th>
+                <th scope="col">Code</th>
+                <th scope="col">Phone</th>
+                <th scope="col">Location</th>
+                <th scope="col">Actions</th>
+            </tr>
+        </thead>
+        <tbody>
+            {% for warehouse in warehouses %}
+                <tr>
+                    <td>{{ warehouse.name }}</td>
+                    <td>{{ warehouse.code }}</td>
+                    <td>{{ warehouse.phone }}</td>
+                    <td>{{ warehouse.location }}</td>
+                    <td>
+                        <a href="{% url 'warehouse_edit' warehouse.pk %}" class="btn btn-secondary btn-sm">Edit</a>
+                        <a href="{% url 'warehouse_delete' warehouse.pk %}" class="btn btn-danger btn-sm">Delete</a>
+                    </td>
+                </tr>
+            {% endfor %}
+        </tbody>
+    </table>
+</div>
+{% endblock %}
