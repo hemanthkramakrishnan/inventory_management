@@ -13,7 +13,7 @@ class StaffSerializer(serializers.ModelSerializer):
 
     class Meta:
         model = Staff
-        fields = ('id', 'user', 'role', 'email')
+        fields = ('id', 'user', 'first_name', 'last_name', 'phone_number', 'email')
 
 
 class ManagerSerializer(serializers.ModelSerializer):
@@ -21,4 +21,4 @@ class ManagerSerializer(serializers.ModelSerializer):
 
     class Meta:
         model = Manager
-        fields = ('id', 'user', 'department', 'email')
+        fields = ('id', 'user', 'first_name', 'last_name', 'phone_number', 'email')
