@@ -1,9 +1,6 @@
 from django.contrib.auth.models import AbstractUser
 from django.db import models
 from PIL import Image, ImageDraw, ImageFont
-import os
-from django.conf import settings
-from django.core.files.storage import default_storage
 from io import BytesIO
 from django.core.files.base import ContentFile
 
@@ -12,7 +9,7 @@ from django.core.files.base import ContentFile
 class CustomUser(AbstractUser):
     is_staff_user = models.BooleanField(default=False)
     is_manager = models.BooleanField(default=False)
-    profile_picture = models.ImageField(upload_to='profile_pics/', blank=True, null=True, max_length=255)
+    profile_picture = models.ImageField(upload_to='', blank=True, null=True, max_length=255)
 
     def save(self, *args, **kwargs):
         # If no profile picture is provided, generate one with initials
@@ -31,7 +28,7 @@ class CustomUser(AbstractUser):
             temp_file.seek(0)
 
             # Set the image as the profile picture
-            self.profile_picture.save(f"/{self.username}_profile.png", ContentFile(temp_file.read()),
+            self.profile_picture.save(f"profile_pics/{self.username}_profile.png", ContentFile(temp_file.read()),
                                       save=False)
         super().save(*args, **kwargs)
 
