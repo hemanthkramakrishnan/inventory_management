@@ -4,12 +4,12 @@
 {% block title %}Login{% endblock %}
 
 {% block content %}
-<div class="container mt-4">
+<div class="w3-container" style="margin-left:235px">
     <h2>Login</h2>
     <form method="post">
         {% csrf_token %}
         {{ form.as_p }}
-        <button type="submit" class="btn btn-primary">Login</button>
+        <button type="submit" class="w3-button w3-gray">Login</button>
     </form>
     <p>Don't have an account? <a href="{% url 'signup' %}">Sign up here</a></p>
 </div>

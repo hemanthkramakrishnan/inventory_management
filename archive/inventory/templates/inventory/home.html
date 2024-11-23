@@ -1,0 +1,37 @@
+<!-- inventory/templates_org/inventory/home.html -->
+{% extends 'inventory/base.html' %}
+
+{% block title %}Home{% endblock %}
+
+{% block content %}
+<div class="w3-container overview">
+	<h4>Overview</h4>
+	<div class="stats-container">
+		<div class="stat">
+			<h2 class="blue">51</h2>
+			<small>Products</small>
+		</div>
+		<div class="stat">
+			<h2 class="red">40</h2>
+			<small>Categories</small>
+		</div>
+		<div class="stat">
+			<h2 class="green">52</h2>
+			<small>Warehouses</small>
+		</div>
+		<div class="stat">
+			<h2 class="yellow">97</h2>
+			<small>Tailors</small>
+		</div>
+	</div>
+</div>
+<div class="w3-container">
+	<ul class="list-group">
+		<li class="list-group-item"><a href="{% url 'category_list' %}">Categories</a></li>
+		<li class="list-group-item"><a href="{% url 'product_list' %}">Products</a></li>
+		<li class="list-group-item"><a href="{% url 'stock_list' %}">Stocks</a></li>
+		<li class="list-group-item"><a href="{% url 'tailor_list' %}">Tailors</a></li>
+		<li class="list-group-item"><a href="{% url 'warehouse_list' %}">Warehouses</a></li>
+	</ul>
+</div>
+{% endblock %}

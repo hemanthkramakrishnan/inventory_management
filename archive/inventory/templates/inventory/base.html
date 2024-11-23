@@ -1,0 +1,57 @@
+<!doctype html>
+<html>
+    <head>
+        {% load static %}
+		<meta charset="utf-8">
+    	<meta name="viewport" content="width=device-width, initial-scale=1">
+		<link rel="icon" type="image/x-icon" href="{% static 'images/favicon32.png' %}">
+		<link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bulma@1.0.2/css/bulma.min.css">
+<!--		<link rel="stylesheet" href="{% static 'css/style.css' %}">-->
+        <title>{% block title %}Inventory Management{% endblock %}</title>
+    </head>
+    <body>
+		<header class="hero is-light">
+			<div class="hero-head">
+				<nav class="nav has-shadow">
+			  		<div class="nav-left">
+						<a class="nav-item">
+				  			<img src="{% static 'images/favicon96.png' %}" alt="Krishna's logo">
+						</a>
+						<a class="nav-item is-tab is-hidden-mobile is-active">Home</a>
+						<a class="nav-item is-tab is-hidden-mobile">Features</a>
+						<a class="nav-item is-tab is-hidden-mobile">Pricing</a>
+						<a class="nav-item is-tab is-hidden-mobile">About</a>
+      				</div>
+					<span class="nav-toggle">
+						<span></span>
+						<span></span>
+						<span></span>
+					</span>
+					<div class="nav-right nav-menu">
+						<a class="nav-item is-tab is-hidden-tablet is-active">Home</a>
+						<a class="nav-item is-tab is-hidden-tablet">Features</a>
+						<a class="nav-item is-tab is-hidden-tablet">Pricing</a>
+						<a class="nav-item is-tab is-hidden-tablet">About</a>
+						<a class="nav-item is-tab">
+						<figure class="image is-16x16" style="margin-right: 8px;">
+							<img src="{% static 'images/default_user.png' %}">
+						</figure>
+						Profile
+						</a>
+						<a class="nav-item is-tab">Log out</a>
+					</div>
+				</nav>
+		  	</div>
+		</header>
+		<section class="section">
+			<div class="container">
+			  <h1 class="title">
+				Hello World
+			  </h1>
+			  <p class="subtitle">
+				My first website with <strong>Bulma</strong>!
+			  </p>
+			</div>
+  		</section>
+    </body>
+</html>

@@ -4,15 +4,15 @@
 {% block title %}Category List{% endblock %}
 
 {% block content %}
-<div class="d-flex justify-content-between mb-3 border-bottom">
-    <h3 class="text-center">Category List</h3>
+<div class="w3-container" style="margin-left:235px">
+	<h3 class="text-center">Category List</h3>
     <a href="{% url 'category_add' %}" class="btn btn-primary mb-3">+ New</a>
 </div>
 
-<div class="d-flex">
-    <table class="table table-bordered text-center">
+<div class="w3-container" style="margin-left:235px">
+    <table class="w3-table-all w3-centered">
         <thead>
-            <tr class="table-primary">
+            <tr class="w3-gray">
                 <th scope="col">Name</th>
                 <th scope="col">Description</th>
 				<th scope="col">Actions</th>

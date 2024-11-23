@@ -43,6 +43,7 @@ def logout_view(request):
     return redirect('home')
 
 
+@login_required
 def category_list(request):
     categories = Category.objects.all()
     return render(request, 'inventory/category_list.html', {'categories': categories})
@@ -60,6 +61,7 @@ def category_add(request):
     return render(request, 'inventory/category_form.html', {'form': form})
 
 
+@login_required
 def category_edit(request, pk):
     category = get_object_or_404(Category, pk=pk)
     if request.method == 'POST':
@@ -72,6 +74,7 @@ def category_edit(request, pk):
     return render(request, 'inventory/category_form.html', {'form': form})
 
 
+@login_required
 def category_delete(request, pk):
     category = get_object_or_404(Category, pk=pk)
     if request.method == 'POST':
@@ -80,11 +83,13 @@ def category_delete(request, pk):
     return render(request, 'inventory/category_confirm_delete.html', {'category': category})
 
 
+@login_required
 def product_list(request):
     products = Product.objects.all()
     return render(request, 'inventory/product_list.html', {'products': products})
 
 
+@login_required
 def product_add(request):
     if request.method == 'POST':
         form = ProductForm(request.POST)
@@ -96,6 +101,7 @@ def product_add(request):
     return render(request, 'inventory/product_form.html', {'form': form})
 
 
+@login_required
 def product_edit(request, pk):
     product = get_object_or_404(Product, pk=pk)
     if request.method == 'POST':
@@ -108,6 +114,7 @@ def product_edit(request, pk):
     return render(request, 'inventory/product_form.html', {'form': form})
 
 
+@login_required
 def product_delete(request, pk):
     product = get_object_or_404(Product, pk=pk)
     if request.method == 'POST':
@@ -116,11 +123,13 @@ def product_delete(request, pk):
     return render(request, 'inventory/product_confirm_delete.html', {'product': product})
 
 
+@login_required
 def tailor_list(request):
     tailors = Tailor.objects.all()
     return render(request, 'inventory/tailor_list.html', {'tailors': tailors})
 
 
+@login_required
 def tailor_add(request):
     if request.method == 'POST':
         form = TailorForm(request.POST)
@@ -132,6 +141,7 @@ def tailor_add(request):
     return render(request, 'inventory/tailor_form.html', {'form': form})
 
 
+@login_required
 def tailor_edit(request, pk):
     tailor = get_object_or_404(Tailor, pk=pk)
     if request.method == 'POST':
@@ -144,6 +154,7 @@ def tailor_edit(request, pk):
     return render(request, 'inventory/tailor_form.html', {'form': form})
 
 
+@login_required
 def tailor_delete(request, pk):
     tailor = get_object_or_404(Tailor, pk=pk)
     if request.method == 'POST':
@@ -152,11 +163,13 @@ def tailor_delete(request, pk):
     return render(request, 'inventory/tailor_confirm_delete.html', {'tailor': tailor})
 
 
+@login_required
 def warehouse_list(request):
     warehouses = Warehouse.objects.all()
     return render(request, 'inventory/warehouse_list.html', {'warehouses': warehouses})
 
 
+@login_required
 def warehouse_add(request):
     if request.method == 'POST':
         form = WarehouseForm(request.POST)
@@ -168,6 +181,7 @@ def warehouse_add(request):
     return render(request, 'inventory/warehouse_form.html', {'form': form})
 
 
+@login_required
 def warehouse_edit(request, pk):
     warehouse = get_object_or_404(Warehouse, pk=pk)
     if request.method == 'POST':
@@ -180,6 +194,7 @@ def warehouse_edit(request, pk):
     return render(request, 'inventory/warehouse_form.html', {'form': form})
 
 
+@login_required
 def warehouse_delete(request, pk):
     warehouse = get_object_or_404(Warehouse, pk=pk)
     if request.method == 'POST':
@@ -188,11 +203,13 @@ def warehouse_delete(request, pk):
     return render(request, 'inventory/warehouse_confirm_delete.html', {'warehouse': warehouse})
 
 
+@login_required
 def stock_list(request):
     stocks = Stock.objects.all()
     return render(request, 'inventory/stock_list.html', {'stocks': stocks})
 
 
+@login_required
 def stock_add(request):
     if request.method == 'POST':
         form = StockForm(request.POST)
@@ -204,6 +221,7 @@ def stock_add(request):
     return render(request, 'inventory/stock_form.html', {'form': form})
 
 
+@login_required
 def stock_edit(request, pk):
     stock = get_object_or_404(Stock, pk=pk)
     if request.method == 'POST':
@@ -216,6 +234,7 @@ def stock_edit(request, pk):
     return render(request, 'inventory/stock_form.html', {'form': form})
 
 
+@login_required
 def stock_delete(request, pk):
     stock = get_object_or_404(Stock, pk=pk)
     if request.method == 'POST':
@@ -265,6 +284,7 @@ def outgoing_stock_add(request):
     return render(request, 'inventory/outgoing_stock_form.html', {'form': form})
 
 
+@login_required
 def outgoing_stock_edit(request, pk):
     outgoing_stock = get_object_or_404(OutgoingStock, pk=pk)
     if request.method == 'POST':
@@ -277,6 +297,7 @@ def outgoing_stock_edit(request, pk):
     return render(request, 'inventory/outgoing_stock_form.html', {'form': form})
 
 
+@login_required
 def outgoing_stock_delete(request, pk):
     outgoing_stock = get_object_or_404(OutgoingStock, pk=pk)
     if request.method == 'POST':
