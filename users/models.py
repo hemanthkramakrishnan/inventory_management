@@ -44,7 +44,7 @@ class Staff(models.Model):
     first_name = models.CharField(max_length=30, default='')
     last_name = models.CharField(max_length=30, default='')
     phone_number = models.CharField(max_length=15, blank=True, null=True)
-    email = models.EmailField(unique=True)
+    # email = models.EmailField(unique=True)
 
     def __str__(self):
         return self.user.username
@@ -56,7 +56,7 @@ class Manager(models.Model):
     first_name = models.CharField(max_length=30, default='')
     last_name = models.CharField(max_length=30, default='')
     phone_number = models.CharField(max_length=15, blank=True, null=True)
-    email = models.EmailField(unique=True, blank=True, null=True)
+    # email = models.EmailField(unique=True, blank=True, null=True)
 
     def __str__(self):
         return self.user.username
