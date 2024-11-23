@@ -16,3 +16,6 @@ openpyxl==3.1.5
 phonenumbers==8.13.43
 requests==2.32.3
 tablib==3.6.1
+
+pillow~=11.0.0
+djangorestframework~=3.15.2
