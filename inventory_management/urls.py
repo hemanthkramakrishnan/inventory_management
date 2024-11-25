@@ -22,7 +22,7 @@ from django.urls import include, path
 urlpatterns = [
     path('admin/', admin.site.urls),
     path('api/users/', include('users.urls')),
-    # path('inventory/', include('inventory.urls')),
+    path('api-auth/', include('rest_framework.urls', namespace='rest_framework')) # For browsable API login
 ]
 
 if settings.DEBUG:
