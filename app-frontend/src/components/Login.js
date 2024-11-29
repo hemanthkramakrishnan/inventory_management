@@ -17,7 +17,7 @@ const Login = () => {
     setCredentials({ ...credentials, [name]: value });
   };
 
-  const [isLoading, setIsLoading] = useState(false);
+  const [setIsLoading] = useState(false);  // isLoading,
 
   const handleSubmit = (e) => {
     e.preventDefault();

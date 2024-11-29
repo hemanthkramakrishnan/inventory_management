@@ -5,6 +5,8 @@ import StaffList from './StaffList';
 import ManagerList from './ManagerList';
 import CreateUser from './CreateUser';
 import Login from './Login';
+import WarehouseList from './WarehouseList';
+import StockList from './StockList';
 
 const AppRouter = () => {
   return (
