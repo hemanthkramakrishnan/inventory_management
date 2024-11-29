@@ -10,10 +10,18 @@ class CustomUserSerializer(serializers.ModelSerializer):
 
     class Meta:
         model = CustomUser
-        fields = ('id', 'username', 'password', 'email', 'role', 'profile_picture')
+        fields = ('id', 'username', 'password', 'email', 'role', 'profile_picture', 'first_name', 'last_name')
 
     def create(self, validated_data):
+        role = validated_data.pop('role', None)
         user = CustomUser.objects.create_user(**validated_data)
+        if role:
+            user.role = role
+            if role == 'staff':
+                user.is_staff_user = True
+            elif role == 'manager':
+                user.is_manager = True
+        user.save()
         return user
 
     def update(self, instance, validated_data):

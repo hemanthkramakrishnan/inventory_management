@@ -1,5 +1,6 @@
 import React, { useState } from 'react';
 import axios from 'axios';
+import { useNavigate } from 'react-router-dom';
 
 const CreateUser = () => {
   const [formData, setFormData] = useState({
@@ -12,6 +13,8 @@ const CreateUser = () => {
     role: 'staff' // Can be either 'staff' or 'manager'
   });
 
+  const navigate = useNavigate();
+
   const handleChange = (e) => {
     const { name, value } = e.target;
     setFormData({ ...formData, [name]: value });
@@ -22,6 +25,7 @@ const CreateUser = () => {
     axios.post('http://127.0.0.1:8000/api/users/users/', formData)
       .then(response => {
         alert('User created successfully');
+        navigate('/login');
       })
       .catch(error => {
         console.error('There was an error creating the user!', error);

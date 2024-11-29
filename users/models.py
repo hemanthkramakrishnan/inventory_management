@@ -7,13 +7,13 @@ from django.core.files.base import ContentFile
 
 # Extending the default User model
 class CustomUser(AbstractUser):
-    is_staff_user = models.BooleanField(default=False)
-    is_manager = models.BooleanField(default=False)
     ROLE_CHOICES = (
         ('staff', 'Staff'),
         ('manager', 'Manager'),
     )
     role = models.CharField(max_length=10, choices=ROLE_CHOICES, blank=True, null=True)
+    is_staff_user = models.BooleanField(default=False)
+    is_manager = models.BooleanField(default=False)
     profile_picture = models.ImageField(upload_to='', blank=True, null=True, max_length=255)
 
     def save(self, *args, **kwargs):
@@ -35,6 +35,14 @@ class CustomUser(AbstractUser):
             # Set the image as the profile picture
             self.profile_picture.save(f"profile_pics/{self.username}_profile.png", ContentFile(temp_file.read()),
                                       save=False)
+
+        if self.role == 'staff':
+            self.is_staff_user = True
+            self.is_manager = False
+        elif self.role == 'manager':
+            self.is_manager = True
+            self.is_staff_user = False
+
         super().save(*args, **kwargs)
 
     def _get_light_color(self):
