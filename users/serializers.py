@@ -7,6 +7,7 @@ from .models import CustomUser
 
 class CustomUserSerializer(serializers.ModelSerializer):
     password = serializers.CharField(write_only=True)
+    profile_picture = serializers.ImageField(required=False)
 
     class Meta:
         model = CustomUser
@@ -32,3 +33,10 @@ class CustomUserSerializer(serializers.ModelSerializer):
                 setattr(instance, attr, value)
             instance.save()
             return instance
+
+    def to_representation(self, instance):
+        representation = super().to_representation(instance)
+        # Add a default profile picture if not set
+        if not instance.profile_picture:
+            representation['profile_picture'] = 'profile_pics/default_user.png'
+        return representation

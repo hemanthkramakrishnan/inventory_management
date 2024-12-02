@@ -7,6 +7,7 @@ from rest_framework.views import APIView
 from rest_framework import status
 from .models import CustomUser
 from .serializers import CustomUserSerializer
+from rest_framework.parsers import MultiPartParser, FormParser
 
 
 class IsSuperUser(permissions.BasePermission):
@@ -17,6 +18,7 @@ class IsSuperUser(permissions.BasePermission):
 class CustomUserViewSet(viewsets.ModelViewSet):
     queryset = CustomUser.objects.all()
     serializer_class = CustomUserSerializer
+    parser_classes = (MultiPartParser, FormParser)
     # permission_classes = [IsSuperUser]
 
 
@@ -32,7 +34,8 @@ class CustomUserDetailView(APIView):
                 'username': user.username,
                 'first_name': user.first_name,
                 'last_name': user.last_name,
-                'email': user.email
+                'email': user.email,
+                'profile_picture': user.profile_picture.url if user.profile_picture else None
             })
         return Response(status=status.HTTP_401_UNAUTHORIZED)
 

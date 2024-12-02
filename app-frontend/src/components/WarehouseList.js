@@ -16,7 +16,7 @@ const WarehouseList = () => {
   }, []);
 
   const fetchWarehouses = () => {
-    axios.get('http://127.0.0.1:8000/api/warehouse/warehouses/')
+    axios.get('http://127.0.0.1:8000/api/inventory/warehouses/')
       .then(response => {
         setWarehouses(response.data);
       })
@@ -32,7 +32,7 @@ const WarehouseList = () => {
 
   const handleAddWarehouse = (e) => {
     e.preventDefault();
-    axios.post('http://127.0.0.1:8000/api/warehouse/warehouses/', newWarehouse)
+    axios.post('http://127.0.0.1:8000/api/inventory/warehouses/', newWarehouse)
       .then(response => {
         setWarehouses([...warehouses, response.data]);
         setNewWarehouse({ name: '', location: '', description: '' });

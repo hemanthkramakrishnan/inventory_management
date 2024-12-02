@@ -7,6 +7,10 @@ import CreateUser from './CreateUser';
 import Login from './Login';
 import WarehouseList from './WarehouseList';
 import StockList from './StockList';
+import CategoryList from './CategoryList';
+import ProductList from './ProductList';
+import RawMaterialList from './RawMaterialList';
+import WarehouseStock from './WarehouseStock';
 
 const AppRouter = () => {
   return (
@@ -19,6 +23,9 @@ const AppRouter = () => {
         <Route path="/login" element={<Login />} />
         <Route path="/warehouses" element={<WarehouseList />} />
         <Route path="/stocks" element={<StockList />} />
+        <Route path="/categories" element={<CategoryList />} />
+        <Route path="/products" element={<ProductList />} />
+        <Route path="/rawmaterials" element={<RawMaterialList />} />
       </Routes>
     </Router>
   );

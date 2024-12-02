@@ -17,7 +17,7 @@ const Login = () => {
     setCredentials({ ...credentials, [name]: value });
   };
 
-  const [setIsLoading] = useState(false);  // isLoading,
+  const [isLoading, setIsLoading] = useState(false);
 
   const handleSubmit = (e) => {
     e.preventDefault();
@@ -31,7 +31,7 @@ const Login = () => {
             setUser(userResponse.data);
             localStorage.setItem('user', JSON.stringify(userResponse.data));
             setIsLoading(false);
-            navigate('/');
+            navigate('/userhome');
             console.log(user)
           })
           .catch(error => {

@@ -7,6 +7,7 @@ import './UserHome.css';
 
 const Home = () => {
   const [user, setUser] = useState(null);
+  const [selectedFile, setSelectedFile] = useState(null);
 
   useEffect(() => {
     const fetchUserData = async () => { // Create an async function
@@ -26,6 +27,32 @@ const Home = () => {
     fetchUserData(); // Call the async function
   }, []);
 
+  const handleFileChange = (e) => {
+    setSelectedFile(e.target.files[0]);
+  };
+
+  const handleUpload = async () => {
+    if (selectedFile && user) {
+      const formData = new FormData();
+      formData.append('profile_picture', selectedFile);
+      try {
+        const accessToken = localStorage.getItem('access_token');
+        axios.defaults.headers.common['Authorization'] = `Bearer ${accessToken}`;
+        await axios.patch(`http://127.0.0.1:8000/api/users/${user.id}/`, formData, {
+          headers: {
+            'Content-Type': 'multipart/form-data'
+          }
+        });
+        // Refresh user data after upload
+        const response = await axios.get('http://127.0.0.1:8000/api/users/me/');
+        setUser(response.data);
+        localStorage.setItem('user', JSON.stringify(response.data));
+      } catch (error) {
+        console.error('Error uploading profile picture:', error);
+      }
+    }
+  };
+
   return (
     <div className="container">
       <header className="header">
@@ -43,6 +70,13 @@ const Home = () => {
       </nav>
       {user && (
         <div>
+          <img
+            src={`http://127.0.0.1:8000/static${user.profile_picture || 'profile_pics/default_user.png'}`}
+            height="100px"
+            width="100px"
+            alt="Profile"
+            className="profile-picture"
+          />
           <p>Welcome, {user.first_name}</p>
           <Logout />
         </div>
