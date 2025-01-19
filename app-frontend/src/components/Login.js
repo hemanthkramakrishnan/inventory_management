@@ -1,45 +1,43 @@
-import React, { useState } from 'react';
+import React, { useState, useContext } from 'react';
 import axios from 'axios';
 import { useNavigate } from 'react-router-dom';
+import { UserContext } from '../UserContext';
 import './Login.css';
 
 const Login = () => {
-  const [user, setUser] = useState(() => {
-    const storedUser = localStorage.getItem('user');
-    return storedUser ? JSON.parse(storedUser) : null;
-  });
-  const [credentials, setCredentials] = useState({username: '', password: ''});
-
+  const { setUser } = useContext(UserContext);
+  const [credentials, setCredentials] = useState({ username: '', password: '' });
+  const [isLoading, setIsLoading] = useState(false);
   const navigate = useNavigate();
+  const [error, setError] = useState('');
 
   const handleChange = (e) => {
     const { name, value } = e.target;
     setCredentials({ ...credentials, [name]: value });
   };
 
-  const [isLoading, setIsLoading] = useState(false);
-
   const handleSubmit = (e) => {
     e.preventDefault();
-    axios.post('http://127.0.0.1:8000/api/users/login/', credentials)
+    setIsLoading(true);
+    axios
+      .post('http://127.0.0.1:8000/api/users/login/', credentials)
       .then(response => {
         localStorage.setItem('access_token', response.data.access);
         localStorage.setItem('refresh_token', response.data.refresh);
         axios.defaults.headers.common['Authorization'] = `Bearer ${response.data.access}`;
-        axios.get('http://127.0.0.1:8000/api/users/me/')
-          .then(userResponse => {
-            setUser(userResponse.data);
-            localStorage.setItem('user', JSON.stringify(userResponse.data));
-            setIsLoading(false);
-            navigate('/userhome');
-            console.log(user)
-          })
-          .catch(error => {
-            console.error('Error fetching user data:', error);
-          });
+        return axios.get('http://127.0.0.1:8000/api/users/me/');
+      })
+      .then(userResponse => {
+        setUser(userResponse.data);
+        localStorage.setItem('user', JSON.stringify(userResponse.data));
+        navigate('/home');
       })
       .catch(error => {
-        alert('There was an error logging in!', error);
+        setError('Invalid username or password. Please try again.');
+        console.error('Login error:', error);
+      })
+      .finally(() => {
+        setIsLoading(false);
       });
   };
 
@@ -49,9 +47,25 @@ const Login = () => {
         <h1>Login</h1>
       </header>
       <form className="login-form" onSubmit={handleSubmit}>
-        <input type="text" name="username" placeholder="Username" value={credentials.username} onChange={handleChange} required />
-        <input type="password" name="password" placeholder="Password" value={credentials.password} onChange={handleChange} required />
-        <button type="submit">Login</button>
+        <input
+          type="text"
+          name="username"
+          placeholder="Username"
+          value={credentials.username}
+          onChange={handleChange}
+          required
+        />
+        <input
+          type="password"
+          name="password"
+          placeholder="Password"
+          value={credentials.password}
+          onChange={handleChange}
+          required
+        />
+        <button type="submit" disabled={isLoading}>
+          {isLoading ? 'Logging in...' : 'Login'}
+        </button>
       </form>
       <div className="create-user-link">
         <p>Don't have an account?</p>

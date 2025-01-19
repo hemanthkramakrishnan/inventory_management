@@ -1,0 +1,39 @@
+.overview {
+  padding: 20px;
+}
+
+.stats-container {
+  display: flex;
+  justify-content: space-around;
+  margin-top: 20px;
+}
+
+.stat {
+  text-align: center;
+}
+
+.stat h2 {
+  font-size: 36px;
+  margin: 0;
+}
+
+.stat small {
+  font-size: 14px;
+  color: #666;
+}
+
+.blue {
+  color: #007bff;
+}
+
+.red {
+  color: #dc3545;
+}
+
+.green {
+  color: #28a745;
+}
+
+.yellow {
+  color: #ffc107;
+}

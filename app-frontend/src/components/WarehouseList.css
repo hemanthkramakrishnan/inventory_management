@@ -1,13 +1,15 @@
 /* WarehouseList.css */
 
 .container {
-  max-width: 800px;
   margin: 20px auto;
-  padding: 20px;
-  background-color: #f9f9f9;
-  border-radius: 8px;
-  box-shadow: 0px 4px 8px rgba(0, 0, 0, 0.1);
+  max-width: 800px;
 }
+
+h2 {
+  text-align: center;
+  margin-bottom: 20px;
+}
+
 
 .add-warehouse-form {
   display: flex;
@@ -24,29 +26,53 @@
 }
 
 .add-warehouse-form button {
-  padding: 10px;
-  font-size: 1rem;
+ padding: 10px;
+  font-size: 16px;
   background-color: #007bff;
   color: white;
   border: none;
-  border-radius: 4px;
   cursor: pointer;
-  transition: background-color 0.3s ease;
 }
 
 .add-warehouse-form button:hover {
   background-color: #0056b3;
 }
 
-.warehouse-list {
-  display: flex;
-  flex-direction: column;
-  gap: 15px;
+.warehouse-table {
+  width: 100%;
+  border-collapse: collapse;
 }
 
-.warehouse-card {
-  padding: 15px;
-  background-color: #ffffff;
-  border-radius: 4px;
-  box-shadow: 0px 2px 4px rgba(0, 0, 0, 0.1);
+.warehouse-table th, .warehouse-table td {
+  border: 1px solid #ddd;
+  padding: 10px;
+  text-align: left;
 }
+
+.warehouse-table th {
+  background-color: #f4f4f4;
+}
+
+.warehouse-table button {
+  margin-right: 5px;
+  padding: 5px 10px;
+  font-size: 14px;
+  background-color: #007bff;
+  color: white;
+  border: none;
+  cursor: pointer;
+}
+
+.warehouse-table button:hover {
+  background-color: #0056b3;
+}
+
+.warehouse-table button:last-child {
+  background-color: #dc3545;
+}
+
+.warehouse-table button:last-child:hover {
+  background-color: #b21f2d;
+}
+
+
