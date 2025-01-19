@@ -3,6 +3,8 @@
 import os
 import sys
 
+from code_folder.inventory_management.inventory_management.settings import DEBUG
+
 
 def main():
     """Run administrative tasks."""

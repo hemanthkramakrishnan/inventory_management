@@ -52,12 +52,22 @@ const ProductList = () => {
       ? `http://127.0.0.1:8000/api/inventory/products/${editingProductId}/`
       : 'http://127.0.0.1:8000/api/inventory/products/';
     const method = isEditing ? 'put' : 'post';
+    console.log("Submitting product data:", formData);
 
     axios({
       method,
       url,
-      data: formData,
-    })
+      data: {
+          description: formData.description,
+          category_id: parseInt(formData.category_id),  // Ensure correct key and data type
+          size: parseInt(formData.size),  // Ensure integer
+          price: parseFloat(formData.price),  // Ensure float
+          quantity_in_stock: parseInt(formData.quantity_in_stock),  // Ensure integer
+      },
+      headers: {
+         'Content-Type': 'application/json'
+      }
+      })
       .then(() => {
         fetchProducts();
         resetForm();
@@ -65,6 +75,18 @@ const ProductList = () => {
       .catch(error => {
         console.error(`Error ${isEditing ? 'updating' : 'creating'} product:`, error);
       });
+  };
+
+  const handleEdit = (product) => {
+    setFormData({
+      description: product.description,
+      category_id: product.category.id,
+      size: parseInt(product.size),
+      price: parseFloat(product.price),
+      quantity_in_stock: product.quantity_in_stock,
+    });
+    setIsEditing(true);
+    setEditingProductId(product.id);
   };
 
   const handleDelete = (id) => {
@@ -77,20 +99,8 @@ const ProductList = () => {
       });
   };
 
-  const handleEdit = (product) => {
-    setFormData({
-      description: product.description,
-      category: product.category.id,
-      size: product.size,
-      price: product.price,
-      quantity_in_stock: product.quantity_in_stock,
-    });
-    setIsEditing(true);
-    setEditingProductId(product.id);
-  };
-
   const resetForm = () => {
-    setFormData({ description: '', category: '', size: '', price: '', quantity_in_stock: '' });
+    setFormData({ description: '', category_id: '', size: '', price: '', quantity_in_stock: '' });
     setIsEditing(false);
     setEditingProductId(null);
   };
@@ -113,8 +123,8 @@ const ProductList = () => {
           required
         />
         <select
-          name="category"
-          value={formData.category}
+          name="category_id"
+          value={formData.category_id}
           onChange={handleChange}
           required
         >
@@ -126,7 +136,7 @@ const ProductList = () => {
           ))}
         </select>
         <input
-          type="text"
+          type="number"
           name="size"
           placeholder="Size"
           value={formData.size}

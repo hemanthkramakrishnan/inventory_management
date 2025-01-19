@@ -10,21 +10,21 @@ h2 {
   margin-bottom: 20px;
 }
 
-.add-stock-form {
+.stock-form {
   display: flex;
   flex-direction: column;
   gap: 10px;
   margin-bottom: 20px;
 }
 
-.add-stock-form input, .add-warehouse-form textarea {
+.stock-form input, .add-warehouse-form textarea {
   padding: 10px;
   font-size: 1rem;
   border: 1px solid #ccc;
   border-radius: 4px;
 }
 
-.add-stock-form button {
+.stock-form button {
   padding: 10px;
   font-size: 16px;
   background-color: #007bff;
@@ -33,7 +33,7 @@ h2 {
   cursor: pointer;
 }
 
-.add-stock-form button:hover {
+.stock-form button:hover {
   background-color: #0056b3;
 }
 
