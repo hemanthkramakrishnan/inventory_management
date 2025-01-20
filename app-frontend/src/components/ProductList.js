@@ -4,7 +4,14 @@ import './ProductList.css';
 
 const ProductList = () => {
   const [products, setProducts] = useState([]);
-  const [formData, setFormData] = useState({ description: '', category: '', size: '', price: '', quantity_in_stock: '' });
+  const [formData, setFormData] = useState({
+    description: '',
+    category: '',
+    code: '',
+    size: '',
+    price: '',
+    quantity_in_stock: ''
+  });
   const [categories, setCategories] = useState([]);
   const [isEditing, setIsEditing] = useState(false);
   const [editingProductId, setEditingProductId] = useState(null);
@@ -61,6 +68,7 @@ const ProductList = () => {
           description: formData.description,
           category_id: parseInt(formData.category_id),  // Ensure correct key and data type
           size: parseInt(formData.size),  // Ensure integer
+          code: formData.code,
           price: parseFloat(formData.price),  // Ensure float
           quantity_in_stock: parseInt(formData.quantity_in_stock),  // Ensure integer
       },
@@ -82,6 +90,7 @@ const ProductList = () => {
       description: product.description,
       category_id: product.category.id,
       size: parseInt(product.size),
+      code: product.code,
       price: parseFloat(product.price),
       quantity_in_stock: product.quantity_in_stock,
     });
@@ -100,7 +109,7 @@ const ProductList = () => {
   };
 
   const resetForm = () => {
-    setFormData({ description: '', category_id: '', size: '', price: '', quantity_in_stock: '' });
+    setFormData({ description: '', category_id: '', size: '', code: '', price: '', quantity_in_stock: '' });
     setIsEditing(false);
     setEditingProductId(null);
   };
@@ -144,6 +153,14 @@ const ProductList = () => {
           required
         />
         <input
+          type="text"
+          name="code"
+          placeholder="Product Code"
+          value={formData.code}
+          onChange={handleChange}
+          required
+        />
+        <input
           type="number"
           name="price"
           placeholder="Price"
@@ -169,6 +186,7 @@ const ProductList = () => {
             <th>Description</th>
             <th>Category</th>
             <th>Size</th>
+            <th>Code</th>
             <th>Price</th>
             <th>Quantity</th>
             <th>Actions</th>
@@ -180,6 +198,7 @@ const ProductList = () => {
               <td>{product.description}</td>
               <td>{product.category.name}</td>
               <td>{product.size}</td>
+              <td>{product.code}</td>
               <td>{product.price}</td>
               <td>{product.quantity_in_stock}</td>
               <td>

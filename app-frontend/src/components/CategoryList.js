@@ -7,10 +7,17 @@ const CategoryList = () => {
   const [formData, setFormData] = useState({ name: '', description: '' });
   const [isEditing, setIsEditing] = useState(false);
   const [editingCategoryId, setEditingCategoryId] = useState(null);
+  const [isAuthenticated, setIsAuthenticated] = useState(false);
 
-  // Fetch categories
   useEffect(() => {
-    fetchCategories();
+    const accessToken = localStorage.getItem('access_token');
+    if (accessToken) {
+      axios.defaults.headers.common['Authorization'] = `Bearer ${accessToken}`;
+      setIsAuthenticated(true);
+      fetchCategories();
+    } else {
+      setIsAuthenticated(false);
+    }
   }, []);
 
   const fetchCategories = () => {
@@ -80,7 +87,6 @@ const CategoryList = () => {
   return (
     <div className="container">
       <h2>Category List</h2>
-
       <form onSubmit={handleSubmit} className="category-form">
         <input
           type="text"
@@ -102,14 +108,27 @@ const CategoryList = () => {
         {isEditing && <button type="button" onClick={resetForm}>Cancel</button>}
       </form>
 
-      {categories.map(category => (
-        <div key={category.id} className="category-card">
-          <h3>{category.name}</h3>
-          <p>{category.description}</p>
-          <button onClick={() => handleEdit(category)}>Edit</button>
-          <button onClick={() => handleDelete(category.id)}>Delete</button>
-        </div>
-      ))}
+      <table className="category-table">
+          <thead>
+            <tr>
+              <th>Name</th>
+              <th>Description</th>
+              <th>Actions</th>
+            </tr>
+          </thead>
+          <tbody>
+            {categories.map((category) => (
+                <tr key={category.id}>
+                  <td>{category.name}</td>
+                  <td>{category.description}</td>
+                  <td>
+                    <button onClick={() => handleEdit(category)}>Edit</button>
+                    <button onClick={() => handleDelete(category.id)}>Delete</button>
+                  </td>
+                </tr>
+            ))}
+          </tbody>
+      </table>
     </div>
   );
 };

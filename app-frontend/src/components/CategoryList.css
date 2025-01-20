@@ -1,0 +1,85 @@
+/* categoryList.css */
+
+.container {
+  margin: 20px auto;
+  max-width: 800px;
+}
+
+h2 {
+  text-align: center;
+  margin-bottom: 20px;
+}
+
+.category-form {
+  display: flex;
+  flex-direction: column;
+  gap: 10px;
+  margin-bottom: 20px;
+}
+
+.category-form input, .add-warehouse-form textarea {
+  padding: 10px;
+  font-size: 1rem;
+  border: 1px solid #ccc;
+  border-radius: 4px;
+}
+
+.category-form button {
+  padding: 10px;
+  font-size: 16px;
+  background-color: #007bff;
+  color: white;
+  border: none;
+  cursor: pointer;
+}
+
+.category-form button:hover {
+  background-color: #0056b3;
+}
+
+.category-table {
+  width: 100%;
+  border-collapse: collapse;
+}
+
+.category-table th, .category-table td {
+  border: 1px solid #ddd;
+  padding: 10px;
+  text-align: left;
+}
+
+.category-table th {
+  background-color: #f4f4f4;
+}
+
+.category-table button {
+  margin-right: 5px;
+  padding: 5px 10px;
+  font-size: 14px;
+  background-color: #007bff;
+  color: white;
+  border: none;
+  cursor: pointer;
+}
+
+.category-table button:hover {
+  background-color: #0056b3;
+}
+
+.category-table button:last-child {
+  background-color: #dc3545;
+}
+
+.category-table button:last-child:hover {
+  background-color: #b21f2d;
+}
+
+.error-message {
+  color: red;
+  margin: 10px 0;
+}
+
+.success-message {
+  color: green;
+  margin: 10px 0;
+}
